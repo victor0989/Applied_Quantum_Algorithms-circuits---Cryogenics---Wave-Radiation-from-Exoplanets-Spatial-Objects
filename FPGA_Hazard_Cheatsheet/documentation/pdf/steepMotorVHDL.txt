@@ -1,0 +1,72 @@
+/**mirar LIBRARIE con el chat
+
+
+entity steppermotor is
+port
+     (
+         clk              :    in STD_LOGIC;
+         CW_CCW           :    in STD_LOGIC;
+         Rst              :    in STD_LOGIC;
+         Step_En          :    in STD_LOGIC;
+         nSLEEP           :    out STD_LOGIC;
+         w1, w2, w3, w4   :    out STD_LOGIC);
+
+end steppermotor
+
+arquitecture Behavioral of steppermotor is
+
+signal div       : std_logic_vector(15 downto 0);
+signal clk_s     : std_logic;
+type state is(reset,first,second, third, fourth);
+signal Ps_state, Nx_state  :  state;
+signal motor     : std_logic_vector(3 downto 0);
+begin
+
+nSLEEP <= Step_En;
+
+process (clk_s,rst)
+begin
+    if Rst='0' then
+        Ps_state <= reset;
+    elseif clk_s'event and clk_s='1' then
+         if Step_en='1' then
+             Ps_state <= Nx_state;
+         end if;
+     end if;
+  end process;
+-------------------------------------------------------
+-------------------------------------------------------
+process  (ps_state,CW_CCW,Step_en,rst)
+begin
+    case(ps_state) is
+
+            when reset  =>
+                                 Nx_state <= first;
+            when first  =>
+                                      if CW_CCW='1' then
+                                          Nx_state <= second;
+                                      else
+                                          Nx_state <= fourth;
+                                      end if;
+
+            when second =>
+                                      if CW_CCW='1' then
+                                          Nx_state <= third;
+
+process(ps_state)
+
+           when reset   =>
+                            Motor    <= "0000";
+     
+           when first   =>
+                            Motor    <= "0110";
+
+           when second  =>
+                            Motor    <= "0101";
+
+           when third   =>
+                            Motor    <= "1001";
+           when fourth  =>   
+                            Motor    <= "1010";
+           end case;
+end process;
