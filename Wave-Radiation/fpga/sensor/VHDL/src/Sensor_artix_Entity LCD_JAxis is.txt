@@ -1,0 +1,24 @@
+Entity LCD_JAxis is
+   Port  :  clk       :  in  std_logic;
+            lcd_n     :  out std_logic;
+                  int_rx  : out std_logic;
+                  date    : out std_logic;
+                  x0, x1, x2, x3, x4 in std_logic_vector(7 downto 0);
+
+end LCD_JAxis;
+
+arquitectura Behavioral of LCD_JAxis is
+
+type arr1 is array (1 to 6) of std_logic_vector(7 downto 0);
+constant datas: arr1 := (X*"38",X*"0o",X*"06",X*"01",X*"02",X*"58");
+
+begin
+process(clk)
+variable  i   :  integer  := 0;
+variable j    :  integer  := 1;
+begin
+
+if clk'event and clk = '1' then
+    if i <= 10000000 then
+        i := i + 1;
+        lcd_e <= '1';
