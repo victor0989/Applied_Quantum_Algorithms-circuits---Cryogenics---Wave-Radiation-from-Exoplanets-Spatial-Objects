@@ -1,0 +1,94 @@
+Resource:
+
+QIPM complexity
+
+Estimated at n = 100
+
+Number of logical qubits	T-depth	T-count
+800n²	(1 ×10¹⁰)κFn1.5ξ−2 log2(n)log2(−1)log2(κFn14/27ξ−1)	(5 ×10¹¹)κFn3.5ξ−2 log2(n)log2(−1)log2(κFξ−1)
+8 ×10⁶	2 ×10²⁴	7 ×10²⁹
+Algorithm(1)
+
+Variables:
+
+(1) min
+
+(2) w
+
+such that:
+
+−ˆu⊺w +q√w⊺ w
+
+1⊺w = 1,
+
+|w − ¯ w|≤ζ,
+
+w≥0,
+
+Algorithm(2)
+
+Variables:
+
+(1) min
+
+(2) w
+
+such that:
+
+w⊺ w
+
+ˆu⊺w ≥¯rmin,
+
+1⊺w = 1,
+
+w≥0.
+
+Algorithm(3)
+
+The objective function in Eq. (3) has a nonlinear term q√w⊺ w, which we linearize by introducing a new scalar variable t and a new constraint t≥√w⊺ w. We obtain the equivalent optimization problem:
+
+min x=(w;t)
+
+[−ˆu;q]⊺(w;t)
+
+such that:
+
+1⊺w=1,
+
+|wi−¯ wi|≤ζi,
+
+wi≥0,
+
+t²≥w⊺ w.
+
+Our goal now is to write the constraints in Eq. (9) as second-order cone constraints. Given an m×n matrix M for which =M⊺M, the constraint on t can be expressed by introducing an m-dimensional variable η subject to the equality constraint η=Mw and the second-order cone constraint (t;η)∈Qm+1.
+
+Max
+
+Variables:
+
+y
+
+such that:
+
+b⊺y
+
+A⊺y+s=c,
+
+s∈Q.
+
+We say that a pair (s;y) is dual feasible whenever A⊺y+s=c and s∈Q. For any point (x;y;s) with x,s∈Q, we define the duality gap as
+
+μ(x,s):=1 r x⊺s=1 r (c⊺x−b⊺y),
+
+The absolute-value constraints are handled by introducing a pair of n-dimensional variables φ and ρ, subject to equality constraints φ=ζ−(w−¯ w) and ρ=ζ+(w−¯ w). The absolute-value constraints are then imposed as positivity constraints φi≥0, ρi≥0, which we include as second-order cone constraints of dimension 1[49].
+
+In summary, we may write the PO problem from Eq. (3) as the following SOCP that minimizes over the variable x=(w;φ;ρ;t;η)∈R3n+m+1:
+
+min x [−ˆu;0;0;q;0]⊺(w;φ;ρ;t;η)=:c⊺x
+
+such that:
+
+(1) ⎛ 1⊺ 0⊺ 0⊺ 0 0⊺ I I 0 0 0 I 0 −I 0 0 M 0 0 0 −I ⎞ ⎠ ⎛ w φ ρ t η ⎞ ⎟ ⎟ ⎟ ⎠ ⎛ 1 ¯ w+ζ ¯ w−ζ 0.
+
+
