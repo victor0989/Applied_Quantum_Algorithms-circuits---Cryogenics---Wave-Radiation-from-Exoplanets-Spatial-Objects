@@ -1,0 +1,20 @@
+ Resource
+ QLSS
+ 
+ Controlled QLSS
+ Number of qubits
+ T-depth
+ T-count
+ 
+ NQcbe + 5
+ 12Qlog2(1/εar) + 2(Q + d)TDcbe + 4(Q + d)TDsp
+ +Q(24 +31)+3dlog2(1/εz)+d(32 −2)
+ 12Qlog2(1/εar) + 2(Q + d)TCcbe + 4(Q + d)TCsp
+ +Q(24 +31)+3dlog2(1/εz)+d(32 −2)
+ NQcbe + 6
+ 12Qlog2(1/εar) + 2(Q + d)TDcbe + 4(Q + d)TDsp
+ +Q(24 +36)+6dlog2(1/εz)+d(32 −2)
+ +12log2(1/εtsp) + 3( − 1)
+ 12Qlog2(1/εar) + 2(Q + d)TCcbe + 4(Q + d)TCsp
+ +Q(24 +51)+6dlog2(1/εz)+d(32 −2)
+ +12(L −1)log2(1/εtsp) + 16(L − −1)
