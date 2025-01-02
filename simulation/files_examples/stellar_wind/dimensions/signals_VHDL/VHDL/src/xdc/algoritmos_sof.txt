@@ -1,0 +1,63 @@
+
+Input: SOCPinstance(A,b,c), listofconesizes(N1,...,Nr)andtolerance
+Output: Vector x that optimizes objective function(eq.(5))to precision
+/*For portfolio optimization,A,b,care given in eq.(10). First n entries of x give optimal
+stock weights. */
+1 (x;y;τ;θ;s;κ)←(e;0;1;1;e;1) /* initialize on centralpath*/
+2μ←1, σ←1− 1
+20√2
+1 √r
+, γ←1/10 /*set parameters*/
+3whileμ≥ : /*Followcentral pathuntilduality gaplessthan */
+4 G←
+⎛
+⎜ ⎜ ⎜ ⎜ ⎜ ⎝
+0 A⊺ −c ¯ c I 0
+−A 0 b −¯ b 0 0
+c⊺ −b⊺ 0 −¯ z 0 1
+−¯ c⊺ ¯ b⊺ ¯ z 0 0 0
+S 0 0 0 X 0
+0 0 κ 0 0 τ
+⎞
+⎟ ⎟ ⎟ ⎟ ⎟ ⎠
+/*from eqs.(19)and (22)*/
+5 h←
+⎛
+⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎝
+−A⊺y+cτ−¯ cθ−s
+Ax−bτ+¯ bθ
+−c⊺x+b⊺y+¯ zθ
+¯ c⊺x−¯ b⊺y−¯ zτ
+σμe−˜ X˜ Se
+σμ−κτ
+⎞
+⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎠
+/*mat.-vec. mult. performedclassically*/
+6 forj=1,...,L: /*preconditioningvia rownormalization*/
+7 g← k
+|Gjk|2 /*normof jth row ofG*/
+8 hj←hj/g
+9 fork=1,...,L:
+10 Gjk←Gjk/g
+11 Classically compute L2 angles and gate decompositions necessary to perform block-encoding of G and
+state-preparation of |h (seeRef. [33])
+12 ξ←1
+13 repeat /* trysmallerandsmaller ξ untilcentral pathisfound*/
+14 ξ←ξ/2
+15 (Δx;Δy;Δτ;Δθ;Δs;Δκ)←ApprSolve(G,h,ξ)
+16 (steplength)← μ(σ−1)(r+1)
+(Δx)⊺s+(Δs)⊺x+(Δκ)τ+(Δτ)κ
+17 (x;y;τ ;θ;s;κ)←(x;y;τ;θ;s;κ)+(steplength)·(Δx;Δy;Δτ;Δθ;Δs;Δκ)
+18 until(x;y;τ ;θ;s;κ)∈N(γ)
+19 (x;y;τ;θ;s;κ)←(x;y;τ ;θ;s;κ)
+20 μ←σμ
+21 returnx/τ
+22def ApprSolve(G,h,ξ):
+23 L←2N+K+3
+24 δ←0.1
+25 ε←0.9ξ
+26 k←57.5Lln(6L/δ)/(ε2(1−ε2/4))
+27 Run tomography as described in section IV D using k applications and k controlled-applications of the QLSS
+algorithm on the system(G,h)
+28 return Vector˜ v forwhich ˜ v =1and ˜ v−v ≤ξwithprobabilityat least1−δ,wherev∝G−1h
+Algorithm1. Quantum interior-point method.
