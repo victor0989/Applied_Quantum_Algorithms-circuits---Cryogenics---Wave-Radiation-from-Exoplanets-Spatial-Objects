@@ -1,0 +1,92 @@
+Fig. 6. Determination of the ratio between typical durations of Ganymede-Jupiter, Io-Jupiter, and non-Io emissions. Histograms of rescaled
+Ganymede-Jupiter event durations by a factor are displayed for six representative values of– indicated above each panel– among those
+studied (0.5 
+2.0, by steps of 0.1). On all panels, the red dashed (resp. blue dotted) histogram is the normalized distribution of durations
+of Io-Jupiter (resp. non-Io) emission events, similar to the black dashed and dotted histograms of Fig. 4b. The black solid line is the normalized
+distribution of rescaled durations of Ganymede-Jupiter events. Thin solid red (resp. blue) lines are the bin-to-bin ratio of the rescaled Ganymede
+Jupiter histogram to the Io-Jupiter (resp. non-Io) one, over the range 20-180 minutes. Boldface straight lines are the degree 1 (lin-log) fit of the
+thin lines of corresponding colour, whose slopes are indicated at the top of the plots.
+Io’s ionosphere (Robs 11 RIo)orGanymede’smagnetosphere
+(Robs 
+25 RGa). Using the measured parameter values from
+Table 21.1 of Kivelson et al. (2004), one finally obtains the ratios
+< Pkin(Io)Pkin(Ga) > 5 (with a large variability between 3
+and 200 around this average value) and < Pmag(Io)Pmag(Ga) >
+17 (with a lower variability between 10 and 40 around this
+average value). The observed ratio between the I-J and G-J radio
+powers, found to be 15 above, is therefore consistent with the
+ratio of the magnetic energy (Poynting) fluxes intercepted by Io
+and Ganymede.
+
+Input: SOCPinstance(A,b,c), listofconesizes(N1,...,Nr)andtolerance
+Output: Vector x that optimizes objective function(eq.(5))to precision
+/*For portfolio optimization, A, b, c are given in eq.(10). First n entries of x give optimal
+stock weights. */
+1 (x; y; τ; θ; s; κ) ← (e; 0; 1; 1; e; 1) /* initialize on central path */
+2 μ ← 1, σ ← 1 − 1 / 20√2
+1 √r , γ ← 1/10 /*set parameters*/
+3 while μ ≥ : /*Follow central path until duality gap less than */
+4 G ←
+⎛
+⎜ ⎜ ⎜ ⎜ ⎜ ⎝
+0 A⊺ −c ¯ c I 0
+−A 0 b −¯ b 0 0
+c⊺ −b⊺ 0 −¯ z 0 1
+−¯ c⊺ ¯ b⊺ ¯ z 0 0 0
+S 0 0 0 X 0
+0 0 κ 0 0 τ
+⎞
+⎟ ⎟ ⎟ ⎟ ⎟ ⎠
+/*from eqs.(19)and (22)*/
+5 h ←
+⎛
+⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎝
+−A⊺y+cτ−¯ cθ−s
+Ax−bτ+¯ bθ
+−c⊺x+b⊺y+¯ zθ
+¯ c⊺x−¯ b⊺y−¯ zτ
+σμe−˜ X˜ Se
+σμ−κτ
+⎞
+⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎠
+/*mat.-vec. mult. performed classically*/
+6 for j = 1,...,L: /*preconditioning via row normalization*/
+7 g ← k
+|Gjk|2 /*norm of jth row of G*/
+8 hj ← hj / g
+9 for k = 1,...,L:
+10 Gjk ← Gjk / g
+11 Classically compute L2 angles and gate decompositions necessary to perform block-encoding of G and
+state-preparation of |h (see Ref. [33])
+12 ξ ← 1
+13 repeat /* try smaller and smaller ξ until central path is found */
+14 ξ ← ξ / 2
+15 (Δx; Δy; Δτ; Δθ; Δs; Δκ) ← ApprSolve(G,h,ξ)
+16 (steplength) ← μ(σ−1)(r+1)
+(Δx)⊺s+(Δs)⊺x+(Δκ)τ+(Δτ)κ
+17 (x; y; τ; θ; s; κ) ← (x; y; τ; θ; s; κ) + (steplength)·(Δx; Δy; Δτ; Δθ; Δs; Δκ)
+18 until (x; y; τ; θ; s; κ) ∈ N(γ)
+19 (x; y; τ; θ; s; κ) ← (x; y; τ; θ; s; κ)
+20 μ ← σμ
+21 return x / τ
+22 def ApprSolve(G,h,ξ):
+23 L ← 2N + K + 3
+24 δ ← 0.1
+25 ε ← 0.9ξ
+26 k ← 57.5Lln(6L/δ)/(ε2(1−ε2/4))
+27 Run tomography as described in section IV D using k applications and k controlled-applications of the QLSS
+algorithm on the system(G,h)
+28 return Vector˜ v for which ˜ v = 1 and ˜ v−v ≤ ξ with probability at least 1−δ, where v ∝ G−1h
+
+Algorithm 1. Quantum interior-point method. // combina las ecuaciones en campos magnéticos/vectoriales o frecuencias a nivel algoritmo cuántico!!
+18 until (x; y; τ; θ; s; κ) ∈ N(γ)
+19 (x; y; τ; θ; s; κ) ← (x; y; τ; θ; s; κ)
+20 μ ← σμ
+21 return x / τ
+22 def ApprSolve(G,h,ξ):
+23 L ← 2N + K + 3
+24 δ ← 0.1
+25 ε ← 0.9ξ
+26 k ← 57.5Lln(6L/δ)/(ε2(1−ε2/4))
+27 Run tomography as described in section IV D using k applications and k controlled-applications of the QLSS
+algorithm on the system(G,h)
