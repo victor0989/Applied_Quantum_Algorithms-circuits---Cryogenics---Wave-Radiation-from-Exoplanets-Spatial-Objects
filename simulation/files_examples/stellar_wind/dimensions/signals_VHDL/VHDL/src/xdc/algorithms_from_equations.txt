@@ -1,0 +1,35 @@
+# Algorithms Derived from the Equations
+
+# 1. Plasma Wave (Langmuir) Frequency
+def plasma_frequency(omega_L, k, v_T):
+    return (omega_L**2 + 3 * k**2 * v_T**2)**0.5
+
+# 2. Velocity Distribution of Energetic Electrons (Loss Cone Function)
+import math
+
+def loss_cone_distribution(v_parallel, v_perp, n_s, m_e, k_B, T_s):
+    factor = n_s / (4 * math.pi * (2 * math.pi)**1.5 * (m_e * k_B * T_s)**2.5)
+    exp_part = math.exp(-m_e * (v_parallel**2 + v_perp**2) / (2 * k_B * T_s))
+    return factor * v_perp**2 * exp_part
+
+# 3. Growth Rate of the Loss Cone Instability
+def growth_rate(omega_p, k, v_Ts, n_s, n, alpha):
+    cot_alpha = 1 / math.tan(alpha)
+    factor1 = 1 / 4 * (math.pi / 2)**0.5 * omega_p**4 / (k**3 * v_Ts**3) * n_s / n
+    factor2 = (omega_p**2 / (k**2 * v_Ts**2) + 2 * cot_alpha**2 - 1) / (1 + cot_alpha**2)
+    exp_part = math.exp(-omega_p**2 / (2 * k**2 * v_Ts**2))
+    return factor1 * factor2 * exp_part
+
+# 4. Unstable Phase Velocities
+def is_unstable(v_ph, v_Ts, alpha):
+    cot_alpha = 1 / math.tan(alpha)
+    return v_ph**2 < v_Ts**2 * (1 - 2 * cot_alpha**2)
+
+# 5. Critical Propagation Angle
+def critical_angle():
+    return math.atan(math.sqrt(2))
+
+# 6. Maximum Growth Rate Value
+def max_growth_rate(n_s, n, omega_L):
+    return 3e-2 * (n_s / n) * omega_L
+
