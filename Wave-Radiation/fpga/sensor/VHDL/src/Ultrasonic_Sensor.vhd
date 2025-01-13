@@ -5,47 +5,64 @@
 
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-use ieee.numeric_std.all;
 
 entity Ultrasonic_Sensor is
-    port(
-       
-        pulse_pin in std_logic;
-        
-        trig_pin: out std_logic;
-         rst: in std_logic;
-
-         clk: in std_logic;
-         an: out std_logic_vector(2 downto 0);
-         sseg: out std_logic_vector (7 downto 0)
-       );
+    Port ( pulse_pin : in STD_LOGIC;
+           trig_pin : out STD_LOGIC;
+           rst : in STD_LOGIC;
+           clk : in STD_LOGIC;
+           an : out STD_LOGIC_VECTOR (2 downto 0);
+           sseg : out STD_LOGIC_VECTOR (7 downto 0));
 end Ultrasonic_Sensor;
 
-arquitectura Behavioral of Ultrasonic_Sensor is
+architecture Behavioral of Ultrasonic_Sensor is
 
 component Range_sensor is
     port(
-        fpgaclk, pulse: in std_logic;
+        fpgaclk: in std_logic;
+        pulse: in std_logic;
         trigger_out: out std_logic;
-        meters, decimeters, centimeters: out std_logic_vector(3 downto 0)
-);
-
+        meters: out std_logic_vector(3 downto 0);
+        decimeters: out std_logic_vector(3 downto 0);
+        centimeters: out std_logic_vector(3 downto 0)
+    );
 end component;
 
-compoent display_cts is port
-(
-  clk: in std_logic;
-  Display_reset : in std_logic;
-  in2, in1, in0: in std_logic_vector(3) downto 0);
-  an: out std_logic_vector(2 downto 0);
-  sseg: out std_logic_vector (7 downto 0)
-);
+component display_cts is
+    port(
+        clk: in std_logic;
+        Display_reset: in std_logic;
+        in2: in std_logic_vector(3 downto 0);
+        in1: in std_logic_vector(3 downto 0);
+        in0: in std_logic_vector(3 downto 0);
+        an: out std_logic_vector(2 downto 0);
+        sseg: out std_logic_vector (7 downto 0)
+    );
 end component;
 
-signal Ai: std_logic_vector(3 downto 0);
+signal meters, decimeters, centimeters: std_logic_vector(3 downto 0);
+signal an_temp: std_logic_vector(2 downto 0);
 
 begin
-    range_sens_: Range_sensor port map (clk, puse_pin, trig_pin, Ai, Si, Ci);
-display_i; display_ctr port map(clk,rst, Ai,   Bi, Ci,   an,   sseg);
+    range_sensor_inst: Range_sensor port map (
+        fpgaclk => clk,
+        pulse => pulse_pin,
+        trigger_out => trig_pin,
+        meters => meters,
+        decimeters => decimeters,
+    centimeters => centimeters
+    );
+
+    display_inst: display_cts port map (
+        clk => clk,
+        Display_reset => rst,
+        in2 => meters,
+        in1 => decimeters,
+        in0 => centimeters,
+        an => an_temp,
+        sseg => sseg
+    );
+
+    an <= an_temp;
 
 end Behavioral;
