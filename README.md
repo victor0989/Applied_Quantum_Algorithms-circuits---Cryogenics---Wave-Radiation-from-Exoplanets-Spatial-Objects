@@ -4,11 +4,15 @@
 
 This repository aims to explore and implement quantum algorithms with a focus on end-to-end resource analysis and optimization, particularly for applications in quantum interior-point methods (QIPMs) for second-order cone programming (SOCP), with a specific use case in portfolio optimization (PO). The repository will also delve into quantum circuits, cryogenics, and the study of wave radiation from exoplanets and other spatial objects, combining this with machine learning techniques and advanced hardware considerations.
 
+---
+
 ## **Description**
 
 This project extracts algorithms and explores resource optimization strategies from the paper *"End-To-End Resource Analysis for Quantum Interior-Point Methods and Portfolio Optimization"* by Alexander M. Dalzell et al. It focuses on the analysis of quantum algorithms for solving optimization problems, such as portfolio optimization, and provides a detailed quantum circuit-level description of quantum interior-point methods (QIPMs).
 
 The repository also incorporates machine learning techniques, utilizing Pennylane for quantum computing and cryogenics, which are key components in the study of wave radiation from exoplanets and other spatial objects. Additionally, this repository includes a collection of FPGA hazard cheatsheets, designed for interfacing with quantum systems and supporting complex algorithms.
+
+---
 
 ## **Key Features**
 
@@ -30,34 +34,50 @@ The repository also incorporates machine learning techniques, utilizing Pennylan
 6. **FPGA Hazard Cheatsheet**  
    A comprehensive cheatsheet for managing FPGA hazards when implementing quantum algorithms, especially under cryogenic conditions. It includes practical tips for hardware setup, error management, and debugging.
 
+---
+
 ## **Getting Started**
 
 1. Clone this repository to your local machine:
    ```bash
    git clone https://github.com/yourusername/Applied_Quantum_Algorithms.git
+   ```
 
 2. Install dependencies for machine learning with Pennylane:
    ```bash
-pip install pennylane
+   pip install pennylane
+   ```
 
-3. Follow the instructions in the docs folder for specific setup details on cryogenics, FPGA configuration, and quantum circuit implementations.
+3. Follow the instructions in the `docs` folder for specific setup details on cryogenics, FPGA configuration, and quantum circuit implementations.
 
-For quantum interior-point method implementations, navigate to the QIPM folder to find detailed examples and resource analysis for portfolio optimization.
+For quantum interior-point method implementations, navigate to the `QIPM` folder to find detailed examples and resource analysis for portfolio optimization.
 
-# Future Work
-Extend the implementation of quantum algorithms for larger-scale optimization problems.
-Improve the cryogenic system integration for better performance in low-temperature environments.
-Investigate more machine learning techniques to improve the accuracy of quantum optimization.
-Study new quantum algorithms for various astrophysical problems involving wave radiation.
-Contributing
-We welcome contributions! Please fork the repository, create a branch, and submit a pull request with your changes. Be sure to follow the guidelines in the CONTRIBUTING.md file.
+---
 
-# sql
+## **Future Work**
 
-This version includes the setup instructions, future work, and contributing section you wanted to add, all integrated into the `README.md` file. Feel free to modify further based on your specific needs.
+- Extend the implementation of quantum algorithms for larger-scale optimization problems.
+- Improve the cryogenic system integration for better performance in low-temperature environments.
+- Investigate more machine learning techniques to improve the accuracy of quantum optimization.
+- Study new quantum algorithms for various astrophysical problems involving wave radiation.
 
-# Radio-astronomy
-https://public.nrao.edu/radio-astronomy/exoplanets/
+---
+
+## **Contributing**
+
+We welcome contributions! Please fork the repository, create a branch, and submit a pull request with your changes. Be sure to follow the guidelines in the `CONTRIBUTING.md` file.
+
+---
+
+## **Image Reference**
+
+![Simulation](simulation/Captura%20de%20pantalla%202025-01-27%20213757.png)
+
+---
+
+## **Additional Resources**
+
+- **Radio Astronomy**: Learn more about exoplanets and wave radiation at [NRAO Radio Astronomy](https://public.nrao.edu/radio-astronomy/exoplanets/).
 
 
 
