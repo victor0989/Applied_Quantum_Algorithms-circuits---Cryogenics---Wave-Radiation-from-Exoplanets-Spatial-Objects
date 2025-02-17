@@ -12,6 +12,44 @@ This project extracts algorithms and explores resource optimization strategies f
 
 The repository also incorporates machine learning techniques, utilizing Pennylane for quantum computing and cryogenics, which are key components in the study of wave radiation from exoplanets and other spatial objects. Additionally, this repository includes a collection of FPGA hazard cheatsheets, designed for interfacing with quantum systems and supporting complex algorithms.
 
+# Monitoring and Control of a Gas Turbine or Jet Engine with ZCU106/ZCU104
+
+## 1. Data Acquisition from Sensors
+Temperature, pressure, or vibration sensors are connected to the FPGA through:
+- **External ADC (SPI/I2C)** if the sensors are analog.
+- **GPIO or MIO** if the sensors already provide digital signals.
+- **Alternative**: Use **PL I/O (LVCMOS/HP I/O)** to acquire fast signals directly.
+
+## 2. FPGA Processing (Vivado + VHDL/Verilog)
+- Design an IP block that receives and processes signals in real-time.
+- Implement **FIR/IIR filters in DSP** to enhance signal quality.
+- Configure **thermal controllers** that adjust combustion based on acquired metrics.
+
+## 3. Ethernet Communication (Tri-speed, GEM, RGMII)
+- Use the **GEM (Gigabit Ethernet MAC)** of the FPGA and configure **RGMII** for real-time data transmission.
+- Send the metrics to a **PC/Server with Python** for further analysis.
+
+## 4. Integration with Theoretical Models (Cantera + Python)
+- Compare acquired data with **thermodynamic simulations in Cantera**.
+- Use **AI/ML (TensorFlow Lite or PyTorch on ARM Cortex-A53)** to predict failures or improve turbine performance.
+
+## 📊 Key Differences between ZCU102, ZCU106, and ZCU104
+
+| Feature             | ZCU102      | ZCU106      | ZCU104      |
+|----------------------|------------|------------|------------|
+| **FPGA Logic**      | 600K LUTs  | 504K LUTs  | 350K LUTs  |
+| **DSP Slices**       | 2520       | 1728       | 1542       |
+| **Ethernet**         | 4x GEM (Tri-speed) | 4x GEM | 4x GEM |
+| **Internal ADC**     | No         | No         | No         |
+| **Interfaces**       | RGMII, PCIe, USB | RGMII, PCIe, USB | RGMII, PCIe, USB |
+| **Processor**        | Quad ARM Cortex-A53 + Dual Cortex-R5 | Quad ARM Cortex-A53 + Dual Cortex-R5 | Quad ARM Cortex-A53 + Dual Cortex-R5 |
+
+## ✅ Conclusion
+- **ZCU106 and ZCU102** are more powerful than **ZCU104**, but all support the same workflow.
+- If you need **more DSP and LUTs** (for intensive signal processing), **ZCU102/ZCU106** are better options.
+- If you need something **more compact and efficient**, **ZCU104** is still a viable option for this type of project.
+
+
 ---
 
 ## **Key Features**
